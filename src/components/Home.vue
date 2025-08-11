@@ -54,7 +54,7 @@ export default {
 }
 </script>
 <template>
-  <div style="display: flex;flex-direction: row; align-items: center;">
+  <div class="home-container">
     <ListMovies :movies="movies" @update:movies="updateMovieStatus"></ListMovies>
     <WheelContainer :movies="moviesToWheel"></WheelContainer>
   </div>

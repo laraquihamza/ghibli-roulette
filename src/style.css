@@ -78,7 +78,7 @@ button:focus-visible {
   }
 }
 .vue-winwheel h1,
-.vue-winwheel h2 {
+.vue-winwheel h2  {
   display: none;
 }
 
@@ -87,4 +87,17 @@ li{
   margin: 0;
   padding: 0;
   text-align: left;
+}
+.home-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .home-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
 }
