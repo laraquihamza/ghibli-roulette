@@ -1,11 +1,36 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* ---------------------------------------------------------------------------
+   Roulette Ghibli — feuille de style globale
+   Palette inspirée des films : ciel, prairie, crème et bois.
+   --------------------------------------------------------------------------- */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+:root {
+  /* Couleurs */
+  --sky-top: #b9e0f2;
+  --sky-mid: #dcf0f7;
+  --sky-low: #f7f1e1;
+  --hill: #86b672;
+  --cream: #fffaf0;
+  --paper: rgba(255, 253, 246, 0.78);
+  --ink: #26403f;
+  --ink-soft: #5c7a75;
+  --forest: #3f7d68;
+  --forest-dark: #2f6151;
+  --sun: #f0a868;
+  --berry: #d98f7a;
+
+  /* Rayons & ombres */
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --shadow-soft: 0 18px 40px rgba(38, 78, 92, 0.16);
+  --shadow-hover: 0 22px 50px rgba(38, 78, 92, 0.24);
+  --ring: 0 0 0 4px rgba(63, 125, 104, 0.22);
+
+  font-family: 'Quicksand', system-ui, 'Segoe UI', Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--ink);
+  color-scheme: light;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,91 +38,146 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
+  min-width: 320px;
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 48%, var(--sky-low) 100%);
+  background-attachment: fixed;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Nuages doux en arrière-plan */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(70px 28px at 12% 16%, rgba(255, 255, 255, 0.95), transparent 70%),
+    radial-gradient(110px 40px at 18% 20%, rgba(255, 255, 255, 0.8), transparent 70%),
+    radial-gradient(60px 24px at 24% 17%, rgba(255, 255, 255, 0.7), transparent 70%),
+    radial-gradient(90px 34px at 79% 12%, rgba(255, 255, 255, 0.9), transparent 70%),
+    radial-gradient(140px 48px at 86% 18%, rgba(255, 255, 255, 0.65), transparent 70%),
+    radial-gradient(120px 42px at 52% 6%, rgba(255, 255, 255, 0.55), transparent 70%);
+  animation: drift 26s ease-in-out infinite alternate;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* Collines à l'horizon */
+body::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 38vh;
+  min-height: 220px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath fill='%23a8cc8c' d='M0,214 C170,150 320,258 520,212 C716,167 858,246 1080,202 C1238,171 1352,212 1440,192 L1440,320 L0,320 Z'/%3E%3Cpath fill='%2386b672' d='M0,262 C200,212 362,298 600,256 C820,217 980,288 1200,250 C1322,229 1392,256 1440,246 L1440,320 L0,320 Z'/%3E%3C/svg%3E");
 }
 
-.card {
-  padding: 2em;
+@keyframes drift {
+  from {
+    transform: translateX(-14px);
+  }
+  to {
+    transform: translateX(14px);
+  }
 }
 
 #app {
-  max-width: 1280px;
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 2.5rem 1.25rem 4rem;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-.vue-winwheel h1,
-.vue-winwheel h2  {
-  display: none;
+h1,
+h2,
+h3 {
+  font-family: 'Baloo 2', 'Quicksand', system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--ink);
 }
 
-li{
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--forest);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  color: var(--forest-dark);
+}
+
+ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  text-align: left;
-}
-.home-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
-@media screen and (max-width: 768px) {
-  .home-container {
-    flex-direction: column;
-    align-items: center;
+/* --- Blocs réutilisables ------------------------------------------------- */
+
+.panel {
+  background: var(--paper);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1.75rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(63, 125, 104, 0.12);
+  color: var(--forest-dark);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+label:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
-  
 }
